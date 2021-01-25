@@ -1,0 +1,34 @@
+\hypertarget{sbWindow_8h}{}\doxysection{src/sb\+Window.h File Reference}
+\label{sbWindow_8h}\index{src/sbWindow.h@{src/sbWindow.h}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+sb\+Window \mbox{\hyperlink{sbWindow_8h_a6c0e974c30d4c9d8a5b1e7cf1b71817c}{sb\+Create\+Window}} (int width, int height, const char $\ast$const name)
+\begin{DoxyCompactList}\small\item\em Constructor-\/like function to ensure proper initialization of sb\+Window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{sbWindow_8h_a6c0e974c30d4c9d8a5b1e7cf1b71817c}\label{sbWindow_8h_a6c0e974c30d4c9d8a5b1e7cf1b71817c}} 
+\index{sbWindow.h@{sbWindow.h}!sbCreateWindow@{sbCreateWindow}}
+\index{sbCreateWindow@{sbCreateWindow}!sbWindow.h@{sbWindow.h}}
+\doxysubsubsection{\texorpdfstring{sbCreateWindow()}{sbCreateWindow()}}
+{\footnotesize\ttfamily sb\+Window sb\+Create\+Window (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{const char $\ast$const}]{name }\end{DoxyParamCaption})}
+
+
+
+Constructor-\/like function to ensure proper initialization of sb\+Window. 
+
+Initializes the sb\+Window object and any other contexts required by the underlying render API.
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & = Desired window width. \\
+\hline
+{\em height} & = Desired window height. \\
+\hline
+{\em name} & = Title of the window to be created.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Created sb\+Window object 
+\end{DoxyReturn}
