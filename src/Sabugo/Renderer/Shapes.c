@@ -7,7 +7,7 @@
 #include "Debug/Debug.h"
 #include "Core/Log.h"
 #include "Public/Math.h"
-#include "Renderer/GraphicalContext.h"
+#include "Renderer/Renderer.h"
 
 #ifdef GL_BACKEND
 /* ***************************** * START OF GL IMPLEMENTATION * ******************************* */

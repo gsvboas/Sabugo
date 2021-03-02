@@ -31,6 +31,7 @@ lib/libsabugo.a:$(SABUGO_CORE)/.obj/Window.o\
 		$(SABUGO_CORE)/.obj/Log.o\
 		$(SABUGO_RENDERER)/.obj/GraphicalContext.o\
 		$(SABUGO_RENDERER)/.obj/Shapes.o\
+		$(SABUGO_RENDERER)/.obj/Renderer.o\
 		$(SABUGO_RENDERER)/.obj/Shader.o
 	ar -rcs $@ $^
 	touch $@

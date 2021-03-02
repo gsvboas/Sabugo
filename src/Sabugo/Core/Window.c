@@ -6,7 +6,7 @@
 #include "Sabugo.h"
 #include "Debug/Debug.h"
 #include "Core/Log.h"
-#include "Renderer/GraphicalContext.h"
+#include "Renderer/Renderer.h"
 
 #ifdef GLFW_BACKEND
 /* **************************** * START OF GLFW IMPLEMENTATION * ****************************** */
@@ -67,7 +67,7 @@ void createWindow(int width, int height, const char* const name)
     glfwGetFramebufferSize(CORE.win.handle, &CORE.win.bufferWidth, &CORE.win.bufferHeight);
     glfwSwapInterval(1); /* VSYNC */
 
-    initGraphicalContext();
+    startRenderer(CORE.win.bufferWidth, CORE.win.bufferHeight);
 }
 
 void terminate()
@@ -79,14 +79,20 @@ void terminate()
 
 void display()
 {
-    consolidateDrawCalls();
+    rendererConsolidateDrawCalls();
     glfwSwapBuffers(CORE.win.handle);
 }
 
 int windowIsOpen()
 {
     glfwPollEvents(); /* temporary */
-    return !glfwWindowShouldClose(CORE.win.handle);
+    if (!glfwWindowShouldClose(CORE.win.handle))
+    {
+	prepareRenderer();
+	return 1;
+    }
+    else
+	return 0;
 }
 /* ************************************* * END OF FILE * ************************************** */
 #endif

@@ -8,6 +8,7 @@
 #include "Core/Log.h"
 #include "Renderer/GraphicalContext.h"
 #include "Renderer/Shader.h"
+#include "Renderer/CPUdata.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,26 +17,20 @@
 /* ***************************** * START OF GL IMPLEMENTATION * ******************************* */
 #include <GL/glew.h>
 /* ********************* * PRIVATE STRUCTURE AND FUNCTION DECLARATIONS * ********************** */
-#define VERTICES_MAX_BUFFER 10
-#define INDEXES_MAX_BUFFER 10
-typedef struct Vertex
-{
-    float pos[2];
-} Vertex;
+#define MAX_VAOS 1
+#define MAX_GPU_BUFFERS 1
 typedef struct GraphicalContext
 {
     /* OpenGL id's */
-    unsigned int vao;
-    unsigned int vbo;
-    unsigned int ibo;
+    unsigned int vaos[MAX_VAOS];
+    unsigned int vbos[MAX_GPU_BUFFERS];
+    unsigned int ibos[MAX_GPU_BUFFERS];
+
+    unsigned int vaos_in_use;
+    unsigned int vbos_in_use;
+    unsigned int ibos_in_use;
+
     unsigned int program;
-
-    /* CPU data buffers */
-    Vertex vertices[VERTICES_MAX_BUFFER];
-    unsigned int vertices_count;
-
-    unsigned int indexes[INDEXES_MAX_BUFFER];
-    unsigned int indexes_count;
 
 
 } GraphicalContext;
@@ -79,41 +74,16 @@ void GLdebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
     printf(". Output message:\n%s\n", message);
 }
 /* ************************** * SEMI PUBLIC FUNCTION DEFINITIONS * *************************** */
-unsigned int appendVertexToVertices(Vec2f v, Color color)
-{
-    GLCONTEXT.vertices[GLCONTEXT.vertices_count].pos[0] = v.x;
-    GLCONTEXT.vertices[GLCONTEXT.vertices_count].pos[1] = v.y;
-    GLCONTEXT.vertices_count++;
-    return GLCONTEXT.vertices_count - 1;
-}
 
-void appendIndexToIndexes(unsigned int index)
-{
-    GLCONTEXT.indexes[GLCONTEXT.indexes_count] = index;
-    GLCONTEXT.indexes_count++;
-}
 
-Vec3ui renderTriangle(Vec2f a, Vec2f b, Vec2f c, Color color)
-{
-    Vec3ui index;
-    index.i = appendVertexToVertices(a, color);
-    appendIndexToIndexes(index.i);
-
-    index.j = appendVertexToVertices(b, color);
-    appendIndexToIndexes(index.j);
-
-    index.k = appendVertexToVertices(c, color);
-    appendIndexToIndexes(index.k);
-
-    return index;
-}
 void initGraphicalContext(int winBufferWidth, int winBufferHeight)
 {
     char* vs;
     char* fs;
 
-    GLCONTEXT.indexes_count = 0;
-    GLCONTEXT.vertices_count = 0;
+    GLCONTEXT.vaos_in_use = 0;
+    GLCONTEXT.vbos_in_use = 0;
+    GLCONTEXT.ibos_in_use = 0;
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK){
 	RENDERER_GRAPHICAL_CONTEXT_DEBUG_CALLBACK(RENDERER_INIT_GRAPHICAL_CONTEXT_GLEW_INIT_ERROR);
@@ -124,17 +94,10 @@ void initGraphicalContext(int winBufferWidth, int winBufferHeight)
     /*glEnable(GL_DEBUG_OUTPUT);*/
     glDebugMessageCallback(GLdebugCallback, NULL);
 
-    glGenVertexArrays(1, &GLCONTEXT.vao);
-    glBindVertexArray(GLCONTEXT.vao);
+    glGenVertexArrays(1, &GLCONTEXT.vaos[0]);
+    glGenBuffers(1, &GLCONTEXT.vbos[0]);
+    glGenBuffers(1, &GLCONTEXT.ibos[0]);
 
-    glGenBuffers(1, &GLCONTEXT.vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, GLCONTEXT.vbo);
-
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-    glEnableVertexAttribArray(0);
-
-    glGenBuffers(1, &GLCONTEXT.ibo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GLCONTEXT.vbo);
 
     /* Load default shaders */
     vs = shaderSourceStringFromFile(DEFAULT_VERTEX_SHADER);
@@ -146,37 +109,97 @@ void initGraphicalContext(int winBufferWidth, int winBufferHeight)
     glUseProgram(GLCONTEXT.program);
 }
 
+void prepareGraphicalContext()
+{
+    GLCONTEXT.vaos_in_use = 0;
+    GLCONTEXT.vbos_in_use = 0;
+    GLCONTEXT.ibos_in_use = 0;
+}
 
-void consolidateDrawCalls()
+
+void relinquishRenderData(const Vertex* const vertices, unsigned int vcount, DataLayout layout, unsigned int* indexes, unsigned int icount)
 {
     unsigned int i;
+    GLenum typegl;
 
-    printf("VERTICES\n");
-    for (i = 0; i < GLCONTEXT.vertices_count; i++)
+    for (i = 0; i < vcount; i++)
     {
-	printf("x = %.3f y = %.3f\n", GLCONTEXT.vertices[i].pos[0], GLCONTEXT.vertices[i].pos[1]);
-    }
-    printf("INDEXES\n");
-    for (i = 0; i < GLCONTEXT.indexes_count; i++)
-    {
-	printf("x = %u y = %u\n", GLCONTEXT.indexes[i], GLCONTEXT.indexes[i]);
+	printf("v[%u] = %.3f, %.3f\n", i, vertices[i].pos[0], vertices[i].pos[1]);
     }
 
-    glBindBuffer(GL_ARRAY_BUFFER, GLCONTEXT.vbo);
-    glBufferData(GL_ARRAY_BUFFER, GLCONTEXT.vertices_count * 2 * sizeof(float), GLCONTEXT.vertices, GL_STATIC_DRAW);
+    for (i = 0; i < icount; i++)
+    {
+	printf("indexes[%u] = %u\n", i, indexes[i]);
+    }
+    glBindVertexArray(GLCONTEXT.vaos[GLCONTEXT.vaos_in_use]);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GLCONTEXT.ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, GLCONTEXT.indexes_count * sizeof(unsigned int), GLCONTEXT.indexes, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, GLCONTEXT.vbos[GLCONTEXT.vbos_in_use]);
+    glBufferData(GL_ARRAY_BUFFER, vcount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GLCONTEXT.ibos[GLCONTEXT.ibos_in_use]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, icount * sizeof(unsigned int), indexes, GL_STATIC_DRAW);
+
+    for (i = 0; i < layout.attributes_count; i++)
+    {
+	printf("i = %u layout attribute\n", i);
+	switch(layout.attributes[i].type)
+	{
+	    case FLOAT:
+		printf("xd");
+		typegl = GL_FLOAT;
+		break;
+	    default:
+		printf("DONT COME IN HERE\n");
+		return;
+	}
+
+	glVertexAttribPointer(i, layout.attributes[i].length, typegl, GL_FALSE, sizeof(Vertex), (void*)layout.attributes[i].offset);
+	glEnableVertexAttribArray(i);
+    }
+
+
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    GLCONTEXT.vaos_in_use++;
+    GLCONTEXT.vbos_in_use++;
+    GLCONTEXT.ibos_in_use++;
+}
+
+void drawContextData(unsigned int icount, Primitive mode)
+{
+    unsigned int i, j;
+    GLenum modegl;
+
+    switch(mode)
+    {
+	case TRIANGLES:
+	    modegl = GL_TRIANGLES;
+	    break;
+	default:
+	    return;
+    }
 
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    glDrawElements(GL_TRIANGLES, GLCONTEXT.indexes_count, GL_UNSIGNED_INT, 0);
-    /*glDrawArrays(GL_TRIANGLES, 0, GLCONTEXT.vertices_count);*/
-    printf("%u\n", GLCONTEXT.vertices_count);
 
-    GLCONTEXT.vertices_count = 0;
-    GLCONTEXT.indexes_count = 0;
+    printf("vaos in use = %u vbos in use = %u\n", GLCONTEXT.vaos_in_use, GLCONTEXT.vbos_in_use);
 
+    for (i = 0; i < GLCONTEXT.vaos_in_use; i++)
+    {
+	glBindVertexArray(GLCONTEXT.vaos[i]);
+
+	for (j = 0; j < GLCONTEXT.vbos_in_use; j++)
+	{
+	    printf("i = %u j = %u\n", i, j);
+	    glBindBuffer(GL_ARRAY_BUFFER, GLCONTEXT.vbos[i]);
+    	    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GLCONTEXT.ibos[i]);
+	    glDrawElements(modegl, icount, GL_UNSIGNED_INT, 0);
+
+	}
+    }
 }
 /* ************************ * PUBLIC INTERFACE FUNCTIONS DEFINITIONS * ************************ */
 /* ************************************* * END OF FILE * ************************************** */
