@@ -13,7 +13,12 @@
 /* ***************************** * PRIVATE FUNCTION DEFINITIONS * ***************************** */
 
 /* ********************** * SEMI PUBLIC INTERFACE FUNCTION DEFINITIONS * ********************** */
-void initRenderer()
+Vec3ui appendVertexToVertices()
+{
+
+}
+
+void appendIndexToIndexes()
 {
 
 }
