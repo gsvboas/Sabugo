@@ -3,7 +3,7 @@
 #include "Sabugo.h"
 #include "Public/Math.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/GraphicalContext.h"
+#include "Renderer/GraphicalContextGL.h"
 #include "Renderer/CPUdata.h"
 #include <stdio.h>
 #include <stdlib.h>

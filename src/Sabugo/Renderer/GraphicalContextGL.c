@@ -6,7 +6,7 @@
 #include "Sabugo.h"
 #include "Debug/Debug.h"
 #include "Core/Log.h"
-#include "Renderer/GraphicalContext.h"
+#include "Renderer/GraphicalContextGL.h"
 #include "Renderer/Shader.h"
 #include "Renderer/CPUdata.h"
 
@@ -19,7 +19,7 @@
 /* ********************* * PRIVATE STRUCTURE AND FUNCTION DECLARATIONS * ********************** */
 #define MAX_VAOS 1
 #define MAX_GPU_BUFFERS 1
-typedef struct GraphicalContext
+typedef struct GraphicalContextGL
 {
     /* OpenGL id's */
     unsigned int vaos[MAX_VAOS];
@@ -33,10 +33,10 @@ typedef struct GraphicalContext
     unsigned int program;
 
 
-} GraphicalContext;
+} GraphicalContextGL;
 
 /* ************************* * PRIVATE GLOBAL VARIABLE DECLARATIONS * ************************* */
-GraphicalContext GLCONTEXT;
+GraphicalContextGL GLCONTEXT;
 
 /* **************************** * PRIVATE FUNCTIONS DEFINITIONS * ***************************** */
 void RENDERER_GRAPHICAL_CONTEXT_DEBUG_CALLBACK(SABUGO_ERROR err)
