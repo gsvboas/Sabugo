@@ -1,0 +1,72 @@
+\hypertarget{group__shapes}{}\doxysection{Renderer/\+Shapes}
+\label{group__shapes}\index{Renderer/Shapes@{Renderer/Shapes}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__shapes_ga3717c4d6402056966e1dcad99b2f27f2}{draw\+Fill\+Triangle}} (Vec2f a, Vec2f b, Vec2f c, Color color)
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled triangle to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}{draw\+Fill\+Rectangle}} (Vec2f nw, Vec2f dim, Color color)
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled rectangle to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__shapes_ga35e4acaa121fe1b76febe226216a3c81}{draw\+Fill\+Circle}} (Vec2f center, float radius, Color color)
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__shapes_ga35e4acaa121fe1b76febe226216a3c81}\label{group__shapes_ga35e4acaa121fe1b76febe226216a3c81}} 
+\index{Renderer/Shapes@{Renderer/Shapes}!drawFillCircle@{drawFillCircle}}
+\index{drawFillCircle@{drawFillCircle}!Renderer/Shapes@{Renderer/Shapes}}
+\doxysubsubsection{\texorpdfstring{drawFillCircle()}{drawFillCircle()}}
+{\footnotesize\ttfamily void draw\+Fill\+Circle (\begin{DoxyParamCaption}\item[{Vec2f}]{center,  }\item[{float}]{radius,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a color-\/filled circle to the screen. 
+
+Like other shapes\textquotesingle{} draw functions, draw\+Circle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. Additionally, due to the way circles are drawn in computer graphics, Sabugo provides facilities for another, more general, draw\+Circle function. See draw\+Fill\+Circle\+Custom\+Density (or draw\+Circle\+Outline\+Custom\+Density) for an input on how many vertices should be used in the circle creation. 
+\begin{DoxyParams}{Parameters}
+{\em center} & position vector which defines the center of the circle to be drawn. \\
+\hline
+{\em radius} & radius of the circle to be drawn. \\
+\hline
+{\em color} & rasterization color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}\label{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}} 
+\index{Renderer/Shapes@{Renderer/Shapes}!drawFillRectangle@{drawFillRectangle}}
+\index{drawFillRectangle@{drawFillRectangle}!Renderer/Shapes@{Renderer/Shapes}}
+\doxysubsubsection{\texorpdfstring{drawFillRectangle()}{drawFillRectangle()}}
+{\footnotesize\ttfamily void draw\+Fill\+Rectangle (\begin{DoxyParamCaption}\item[{Vec2f}]{nw,  }\item[{Vec2f}]{dim,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a color-\/filled rectangle to the screen. 
+
+Like other shapes\textquotesingle{} draw functions, draw\+Rectangle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. 
+\begin{DoxyParams}{Parameters}
+{\em nw} & position vector which defines the north-\/western (up-\/most, left-\/most) vertex of the rectangle to be drawn. \\
+\hline
+{\em dim} & dimension vector \mbox{[}width, height\mbox{]} of the rectangle to be drawn. \\
+\hline
+{\em color} & rasterization color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__shapes_ga3717c4d6402056966e1dcad99b2f27f2}\label{group__shapes_ga3717c4d6402056966e1dcad99b2f27f2}} 
+\index{Renderer/Shapes@{Renderer/Shapes}!drawFillTriangle@{drawFillTriangle}}
+\index{drawFillTriangle@{drawFillTriangle}!Renderer/Shapes@{Renderer/Shapes}}
+\doxysubsubsection{\texorpdfstring{drawFillTriangle()}{drawFillTriangle()}}
+{\footnotesize\ttfamily void draw\+Fill\+Triangle (\begin{DoxyParamCaption}\item[{Vec2f}]{a,  }\item[{Vec2f}]{b,  }\item[{Vec2f}]{c,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+
+
+Draws a color-\/filled triangle to the screen. 
+
+Draws a triangle on the screen, using currently active shaders. 
+\begin{DoxyParams}{Parameters}
+{\em a,b,c} & position vectors which define the vertices of the triangle to be drawn. \\
+\hline
+{\em color} & rasterization color \\
+\hline
+\end{DoxyParams}

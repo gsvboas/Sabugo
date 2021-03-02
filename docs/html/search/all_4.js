@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['windowisopen_4',['windowIsOpen',['../Sabugo_8h.html#af7750879f49c885e1d2276a77227593a',1,'Sabugo.h']]]
+  ['terminate_10',['terminate',['../group__window.html#ga74a45d2648335936561898c390281a6a',1,'Sabugo.h']]]
 ];

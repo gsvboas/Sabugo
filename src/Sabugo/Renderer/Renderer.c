@@ -10,8 +10,8 @@
 
 
 /* ********************* * PRIVATE STRUCTURE AND FUNCTION DECLARATIONS * ********************** */
-#define VERTICES_MAX_BUFFER 10
-#define INDEXES_MAX_BUFFER 10
+#define VERTICES_MAX_BUFFER 2000
+#define INDEXES_MAX_BUFFER 2000
 
 
 
@@ -38,11 +38,18 @@ RenderData RENDERER;
 /* ********************** * SEMI PUBLIC INTERFACE FUNCTION DEFINITIONS * ********************** */
 void startRenderer(int winBufferWidth, int winBufferHeight)
 {
-    RENDERER.layout.attributes_count = 1;
+    RENDERER.layout.attributes_count = 2;
     RENDERER.layout.attributes = (Attribute*)malloc(RENDERER.layout.attributes_count * sizeof(Attribute));
+
+    /* DEFINE LAYOUT */
     RENDERER.layout.attributes[0].type = FLOAT;
     RENDERER.layout.attributes[0].offset = 0;
     RENDERER.layout.attributes[0].length = 2;
+    RENDERER.layout.attributes[1].type = FLOAT;
+    RENDERER.layout.attributes[1].offset = 2 * sizeof(float);
+    RENDERER.layout.attributes[1].length = 4;
+
+
     RENDERER.vertices_count = 0;
     RENDERER.indexes_count = 0;
     initGraphicalContext(winBufferWidth, winBufferHeight);
@@ -57,9 +64,14 @@ void prepareRenderer()
 
 unsigned int appendVertexToVertices(Vec2f v, Color color)
 {
-    /*printf("Appending v.x = %.3f, v.y = %.3f to vertices\n", v.x, v.y);*/
+    printf("Appending v.x = %.3f, v.y = %.3f to vertices\n", v.x, v.y);
     RENDERER.vertices[RENDERER.vertices_count].pos[0] = v.x;
     RENDERER.vertices[RENDERER.vertices_count].pos[1] = v.y;
+    RENDERER.vertices[RENDERER.vertices_count].color[0] = color.r;
+    RENDERER.vertices[RENDERER.vertices_count].color[1] = color.g;
+    RENDERER.vertices[RENDERER.vertices_count].color[2] = color.b;
+    RENDERER.vertices[RENDERER.vertices_count].color[3] = color.a;
+
     /*printf("v no. %u data: pos[0] = %.3f, pos[1] = %.3f\n", RENDERER.vertices_count, RENDERER.vertices[RENDERER.vertices_count].pos[0], RENDERER.vertices[RENDERER.vertices_count].pos[1]);*/
     RENDERER.vertices_count++;
     return RENDERER.vertices_count - 1;

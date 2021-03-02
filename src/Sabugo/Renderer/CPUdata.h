@@ -3,7 +3,8 @@
 
 typedef enum Primitive
 {
-    TRIANGLES = 0
+    TRIANGLES = 0,
+    TRIANGLE_FAN
 } Primitive;
 
 typedef enum AttributeTypeID
@@ -27,6 +28,7 @@ typedef struct DataLayout
 typedef struct Vertex
 {
     float pos[2];
+    float color[4];
 } Vertex;
 
 

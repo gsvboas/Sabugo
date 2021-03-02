@@ -124,7 +124,7 @@ void relinquishRenderData(const Vertex* const vertices, unsigned int vcount, Dat
 
     for (i = 0; i < vcount; i++)
     {
-	printf("v[%u] = %.3f, %.3f\n", i, vertices[i].pos[0], vertices[i].pos[1]);
+	printf("v[%u] = %.3f, %.3f, r=%.3f g=%.3f b=%.3f a=%.3f\n", i, vertices[i].pos[0], vertices[i].pos[1], vertices[i].color[0], vertices[i].color[1], vertices[i].color[2], vertices[i].color[3]);
     }
 
     for (i = 0; i < icount; i++)
@@ -152,6 +152,7 @@ void relinquishRenderData(const Vertex* const vertices, unsigned int vcount, Dat
 		printf("DONT COME IN HERE\n");
 		return;
 	}
+	printf("Layout = %u, %u, %s, GL_FALSE, %u %d", i, layout.attributes[i].length, typegl ? "FLOAT" : "ANOTHER", sizeof(Vertex), (void*)layout.attributes[i].offset);
 
 	glVertexAttribPointer(i, layout.attributes[i].length, typegl, GL_FALSE, sizeof(Vertex), (void*)layout.attributes[i].offset);
 	glEnableVertexAttribArray(i);
@@ -178,11 +179,14 @@ void drawContextData(unsigned int icount, Primitive mode)
 	case TRIANGLES:
 	    modegl = GL_TRIANGLES;
 	    break;
+	case TRIANGLE_FAN:
+	    modegl = GL_TRIANGLE_FAN;
+	    break;
 	default:
 	    return;
     }
 
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     printf("vaos in use = %u vbos in use = %u\n", GLCONTEXT.vaos_in_use, GLCONTEXT.vbos_in_use);

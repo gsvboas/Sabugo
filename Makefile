@@ -24,7 +24,7 @@ DEMO_BIN=./sandbox/demo/bin
 
 
 $(DEMO_BIN)/demo:$(DEMO_SRC)/demo.c lib/libsabugo.a
-	$(CC) -I./src/Sabugo $< -o $@ $(CFLAGS) $(LINK_EXTERNAL) -L./lib -lsabugo
+	$(CC) -I./src/Sabugo $< -o $@ $(CFLAGS) $(LINK_EXTERNAL) -lm -L./lib -lsabugo
 	touch $@
 
 lib/libsabugo.a:$(SABUGO_CORE)/.obj/Window.o\
