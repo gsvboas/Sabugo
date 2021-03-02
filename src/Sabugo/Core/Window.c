@@ -79,6 +79,7 @@ void terminate()
 
 void display()
 {
+    consolidateDrawCalls();
     glfwSwapBuffers(CORE.win.handle);
 }
 

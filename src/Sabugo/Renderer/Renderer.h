@@ -1,7 +1,10 @@
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
-void initRenderer();
+#include "Public/Math.h"
+
+Vec3ui appendVertexToVertices();
+void appendIndexToIndexes();
 
 #endif
 

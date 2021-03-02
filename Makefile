@@ -15,7 +15,7 @@ SABUGO_RENDERER=$(SABUGO_SRC)/Renderer
 
 # Defines
 DEFINE_CORE_BACKEND=-DGLFW_BACKEND
-DEFINE_RENDERER_BACKEND=-DGLEW_BACKEND
+DEFINE_RENDERER_BACKEND=-DGL_BACKEND
 
 # Demo
 DEMO_SRC=./sandbox/demo/src
@@ -29,7 +29,9 @@ $(DEMO_BIN)/demo:$(DEMO_SRC)/demo.c lib/libsabugo.a
 
 lib/libsabugo.a:$(SABUGO_CORE)/.obj/Window.o\
 		$(SABUGO_CORE)/.obj/Log.o\
-		$(SABUGO_RENDERER)/.obj/GraphicalContext.o
+		$(SABUGO_RENDERER)/.obj/GraphicalContext.o\
+		$(SABUGO_RENDERER)/.obj/Shapes.o\
+		$(SABUGO_RENDERER)/.obj/Shader.o
 	ar -rcs $@ $^
 	touch $@
 
