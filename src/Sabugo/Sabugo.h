@@ -7,6 +7,7 @@
 
 #include "Public/Math.h"
 #include "Public/Color.h"
+#include "Public/ShaderType.h"
 
 /* ****************************** * CORE PUBLIC FUNCTIONALITY * ******************************* */
 /** \defgroup core Core */ /** @{ */ /* DOXYGEN_CORE_BEGIN */

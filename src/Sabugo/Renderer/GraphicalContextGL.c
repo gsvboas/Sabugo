@@ -4,11 +4,13 @@
 /* */
 /* *********************************** * GLOBAL INCLUDES * ************************************ */
 #include "Sabugo.h"
+#include "Public/Math.h"
 #include "Debug/Debug.h"
 #include "Core/Log.h"
 #include "Renderer/GraphicalContextGL.h"
 #include "Renderer/Shader.h"
 #include "Renderer/CPUdata.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,7 +33,7 @@ typedef struct GraphicalContextGL
     unsigned int ibos_in_use;
 
     unsigned int program;
-
+    unsigned int uniform_location;
 
 } GraphicalContextGL;
 
@@ -78,8 +80,7 @@ void GLdebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
 
 void initGraphicalContext(int winBufferWidth, int winBufferHeight)
 {
-    char* vs;
-    char* fs;
+    Mat4f m;
 
     GLCONTEXT.vaos_in_use = 0;
     GLCONTEXT.vbos_in_use = 0;
@@ -91,7 +92,7 @@ void initGraphicalContext(int winBufferWidth, int winBufferHeight)
     }
     glViewport(0, 0, winBufferWidth, winBufferHeight);
 
-    /*glEnable(GL_DEBUG_OUTPUT);*/
+    glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(GLdebugCallback, NULL);
 
     glGenVertexArrays(1, &GLCONTEXT.vaos[0]);
@@ -100,13 +101,14 @@ void initGraphicalContext(int winBufferWidth, int winBufferHeight)
 
 
     /* Load default shaders */
-    vs = shaderSourceStringFromFile(DEFAULT_VERTEX_SHADER);
-    fs = shaderSourceStringFromFile(DEFAULT_FRAGMENT_SHADER);
-    GLCONTEXT.program = createShadingProgram(vs, fs);
-    free(vs);
-    free(fs);
-
+    createShader();
+    GLCONTEXT.program = getActiveShader();
     glUseProgram(GLCONTEXT.program);
+
+    ortho(-0.9f, 0.9f, -0.7f, 0.7f, -1.0f, 1.0f, m);
+    GLCONTEXT.uniform_location = glGetUniformLocation(GLCONTEXT.program, "MVP");
+    glUniformMatrix4fv(GLCONTEXT.uniform_location, 1, GL_FALSE, &m[0][0]);
+
 }
 
 void prepareGraphicalContext()
@@ -204,6 +206,20 @@ void drawContextData(unsigned int icount, Primitive mode)
 
 	}
     }
+}
+void graphicalContextTerminate()
+{
+    unsigned int i;
+    for (i = 0; i < GLCONTEXT.ibos_in_use; i++)
+	glDeleteBuffers(1, &GLCONTEXT.ibos[i]);
+    GLCONTEXT.ibos_in_use = 0;
+    for (i = 0; i < GLCONTEXT.vbos_in_use; i++)
+	glDeleteBuffers(1, &GLCONTEXT.vbos[i]);
+    GLCONTEXT.vbos_in_use = 0;
+    for (i = 0; i < GLCONTEXT.vaos_in_use; i++)
+	glDeleteBuffers(1, &GLCONTEXT.vaos[i]);
+    GLCONTEXT.vaos_in_use = 0;
+    shaderTerminate();
 }
 /* ************************ * PUBLIC INTERFACE FUNCTIONS DEFINITIONS * ************************ */
 /* ************************************* * END OF FILE * ************************************** */

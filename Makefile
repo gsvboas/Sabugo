@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Wpedantic -std=c89
+CFLAGS=-Wall -Wextra -Wpedantic -std=c11
 
 # Linkage
 LINK_GLFW=-lglfw
@@ -12,10 +12,14 @@ LINK_EXTERNAL=$(LINK_GLFW) $(LINK_GLEW) $(LINK_GL)
 SABUGO_SRC=src/Sabugo
 SABUGO_CORE=$(SABUGO_SRC)/Core
 SABUGO_RENDERER=$(SABUGO_SRC)/Renderer
+SABUGO_MATHS=$(SABUGO_SRC)/Maths
+SABUGO_EXTRA=$(SABUGO_SRC)/Extra
 
 # Defines
 DEFINE_CORE_BACKEND=-DGLFW_BACKEND
 DEFINE_RENDERER_BACKEND=-DGL_BACKEND
+DEFINE_MATHS_BACKEND=
+DEFINE_EXTRA_BACKEND=
 
 # Demo
 DEMO_SRC=./sandbox/demo/src
@@ -32,7 +36,10 @@ lib/libsabugo.a:$(SABUGO_CORE)/.obj/Window.o\
 		$(SABUGO_RENDERER)/.obj/GraphicalContextGL.o\
 		$(SABUGO_RENDERER)/.obj/Shapes.o\
 		$(SABUGO_RENDERER)/.obj/Renderer.o\
-		$(SABUGO_RENDERER)/.obj/Shader.o
+		$(SABUGO_RENDERER)/.obj/Shader.o\
+		$(SABUGO_RENDERER)/.obj/ShaderGLSL.o\
+		$(SABUGO_MATHS)/.obj/mat4f_transform.o\
+		$(SABUGO_EXTRA)/.obj/CExtend.o
 	ar -rcs $@ $^
 	touch $@
 
@@ -45,6 +52,17 @@ $(SABUGO_RENDERER)/.obj/%.o:$(SABUGO_RENDERER)/%.c
 	@if [ ! -d "$(SABUGO_RENDERER)/.obj" ]; then mkdir "$(SABUGO_RENDERER)/.obj"; fi
 	$(CC) -I./src/Sabugo -c $< -o $@ $(CFLAGS) $(DEFINE_RENDERER_BACKEND)
 	touch $@
+
+$(SABUGO_MATHS)/.obj/%.o:$(SABUGO_MATHS)/%.c
+	@if [ ! -d "$(SABUGO_MATHS)/.obj" ]; then mkdir "$(SABUGO_MATHS)/.obj"; fi
+	$(CC) -I./src/Sabugo -c $< -o $@ $(CFLAGS) $(DEFINE_MATHS_BACKEND)
+	touch $@
+
+$(SABUGO_EXTRA)/.obj/%.o:$(SABUGO_EXTRA)/%.c
+	@if [ ! -d "$(SABUGO_EXTRA)/.obj" ]; then mkdir "$(SABUGO_EXTRA)/.obj"; fi
+	$(CC) -I./src/Sabugo -c $< -o $@ $(CFLAGS) $(DEFINE_EXTRA_BACKEND)
+	touch $@
+
 documentation:
 	doxygen docs/dconfig
 clean:

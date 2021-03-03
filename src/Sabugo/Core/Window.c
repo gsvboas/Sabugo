@@ -72,6 +72,7 @@ void createWindow(int width, int height, const char* const name)
 
 void terminate()
 {
+    rendererTerminate();
     if (CORE.win.handle)
 	glfwDestroyWindow(CORE.win.handle);
     glfwTerminate();

@@ -112,6 +112,11 @@ void rendererConsolidateDrawCalls()
     relinquishRenderData(RENDERER.vertices, RENDERER.vertices_count, RENDERER.layout, RENDERER.indexes, RENDERER.indexes_count);
     drawContextData(RENDERER.indexes_count, TRIANGLES);
 }
+
+void rendererTerminate()
+{
+    graphicalContextTerminate();
+}
 /* ************************ * PUBLIC INTERFACE FUNCTION DEFINITIONS * ************************* */
 
 /* ************************************* * END OF FILE * ************************************** */

@@ -8,6 +8,6 @@ void initGraphicalContext();
 void prepareGraphicalContext();
 void relinquishRenderData(const Vertex* const vertices, unsigned int vcount, DataLayout layout, unsigned int* indexes, unsigned int icount);
 void drawContextData(unsigned int icount, Primitive mode);
-
+void graphicalContextTerminate();
 #endif
 
