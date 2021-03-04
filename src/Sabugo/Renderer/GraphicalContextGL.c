@@ -105,7 +105,7 @@ void initGraphicalContext(int winBufferWidth, int winBufferHeight)
     GLCONTEXT.program = getActiveShader();
     glUseProgram(GLCONTEXT.program);
 
-    ortho(-0.9f, 0.9f, -0.7f, 0.7f, -1.0f, 1.0f, m);
+    ortho(-1.0f, 1.0f, 1.0f, -1.0f, -1.0f, 1.0f, m);
     GLCONTEXT.uniform_location = glGetUniformLocation(GLCONTEXT.program, "MVP");
     glUniformMatrix4fv(GLCONTEXT.uniform_location, 1, GL_FALSE, &m[0][0]);
 

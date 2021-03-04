@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Wpedantic -std=c11
+CFLAGS=-Wall -Wextra -Wpedantic -std=c89
 
 # Linkage
 LINK_GLFW=-lglfw
