@@ -1,1 +1,1 @@
-A graphics API designed to support a ludic approach to teaching C programming.
+A graphics API designed to support a ludic approach to teaching C programming. Stable branch.
