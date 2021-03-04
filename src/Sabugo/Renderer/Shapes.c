@@ -48,7 +48,7 @@ void drawFillTriangle(Vec2f a, Vec2f b, Vec2f c, Color color)
 }
 void drawFillCircle(Vec2f center, float radius, Color color)
 {
-    drawFillCircleCustomDensity(center, radius, color, 24);
+    drawFillCircleCustomDensity(center, radius, color, 36);
 }
 void drawFillCircleCustomDensity(Vec2f center, float radius, Color color, unsigned int density)
 {
