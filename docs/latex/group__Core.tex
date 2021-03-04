@@ -1,0 +1,67 @@
+\hypertarget{group__Core}{}\doxysection{Core/\+Window}
+\label{group__Core}\index{Core/Window@{Core/Window}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__Core_ga298017c20d56cf65d42a42720ab99627}{create\+Window}} (int width, int height, const char $\ast$const name)
+\item 
+void \mbox{\hyperlink{group__Core_ga74a45d2648335936561898c390281a6a}{terminate}} ()
+\item 
+void \mbox{\hyperlink{group__Core_ga1e5b20fed15743656bb6d2e6a6ea6269}{display}} ()
+\item 
+int \mbox{\hyperlink{group__Core_gaf7750879f49c885e1d2276a77227593a}{window\+Is\+Open}} ()
+\item 
+void \mbox{\hyperlink{group__Core_ga504cf70a2677cf76971affcede19bdcc}{draw\+Triangle}} (Vec2f a, Vec2f b, Vec2f c, Color color)
+\item 
+\mbox{\Hypertarget{group__Core_gaea62fc3e4d40613b02ee7920be5ed92d}\label{group__Core_gaea62fc3e4d40613b02ee7920be5ed92d}} 
+void {\bfseries draw\+Rectangle} (Vec2f nw, Vec2f dim, Color color)
+\item 
+\mbox{\Hypertarget{group__Core_gaca2dcf1fdabce7280c21ff4b3135bbe0}\label{group__Core_gaca2dcf1fdabce7280c21ff4b3135bbe0}} 
+void {\bfseries draw\+Circle} (Vec2f center, float radius, Color color)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__Core_ga298017c20d56cf65d42a42720ab99627}\label{group__Core_ga298017c20d56cf65d42a42720ab99627}} 
+\index{Core/Window@{Core/Window}!createWindow@{createWindow}}
+\index{createWindow@{createWindow}!Core/Window@{Core/Window}}
+\doxysubsubsection{\texorpdfstring{createWindow()}{createWindow()}}
+{\footnotesize\ttfamily void create\+Window (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{const char $\ast$const}]{name }\end{DoxyParamCaption})}
+
+Initializes a window and its graphical context.
+\begin{DoxyParams}{Parameters}
+{\em width} & win width.\\
+\hline
+{\em height} & win height.\\
+\hline
+{\em win} & name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__Core_ga1e5b20fed15743656bb6d2e6a6ea6269}\label{group__Core_ga1e5b20fed15743656bb6d2e6a6ea6269}} 
+\index{Core/Window@{Core/Window}!display@{display}}
+\index{display@{display}!Core/Window@{Core/Window}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Displays current frame \mbox{\Hypertarget{group__Core_ga504cf70a2677cf76971affcede19bdcc}\label{group__Core_ga504cf70a2677cf76971affcede19bdcc}} 
+\index{Core/Window@{Core/Window}!drawTriangle@{drawTriangle}}
+\index{drawTriangle@{drawTriangle}!Core/Window@{Core/Window}}
+\doxysubsubsection{\texorpdfstring{drawTriangle()}{drawTriangle()}}
+{\footnotesize\ttfamily void draw\+Triangle (\begin{DoxyParamCaption}\item[{Vec2f}]{a,  }\item[{Vec2f}]{b,  }\item[{Vec2f}]{c,  }\item[{Color}]{color }\end{DoxyParamCaption})}
+
+\} \mbox{\Hypertarget{group__Core_ga74a45d2648335936561898c390281a6a}\label{group__Core_ga74a45d2648335936561898c390281a6a}} 
+\index{Core/Window@{Core/Window}!terminate@{terminate}}
+\index{terminate@{terminate}!Core/Window@{Core/Window}}
+\doxysubsubsection{\texorpdfstring{terminate()}{terminate()}}
+{\footnotesize\ttfamily void terminate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Cleans up the graphical context created by \mbox{\hyperlink{group__Core_ga298017c20d56cf65d42a42720ab99627}{create\+Window(int, int, const char$\ast$ const)}} \mbox{\Hypertarget{group__Core_gaf7750879f49c885e1d2276a77227593a}\label{group__Core_gaf7750879f49c885e1d2276a77227593a}} 
+\index{Core/Window@{Core/Window}!windowIsOpen@{windowIsOpen}}
+\index{windowIsOpen@{windowIsOpen}!Core/Window@{Core/Window}}
+\doxysubsubsection{\texorpdfstring{windowIsOpen()}{windowIsOpen()}}
+{\footnotesize\ttfamily int window\+Is\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Queries whether window is still open 

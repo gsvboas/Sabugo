@@ -1,0 +1,7 @@
+1. Refactor Renderer/GraphicalContext.c's interfacing with Renderer/Shader.h to make Renderer/Shader.c handle shader string memory allocation (Renderer/Shader.c should be the one responsible for freeing the shader string).
+
+2. Renaming Renderer/GraphicalContext.c to Renderer/renderergl.c
+
+3. Finish the public interface Sabugo.h
+
+4. Implement Sabugo.h's specification.

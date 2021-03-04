@@ -11,5 +11,8 @@ typedef struct Vector3UnsignedInt
     unsigned int i, j, k;
 } Vec3ui;
 
+typedef float Mat4f[4][4];
+
+void ortho(float left, float right, float bottom, float top, float zNear, float zFar, Mat4f m);
 #endif
 
