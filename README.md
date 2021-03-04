@@ -1,4 +1,5 @@
-![image](https://user-images.githubusercontent.com/77863706/109902224-ebdd4a00-7c78-11eb-82dc-7a60678deb0c.png | width=50)
+![sabugo](https://user-images.githubusercontent.com/77863706/109902922-d7e61800-7c79-11eb-8a15-ea213f9ba810.png)
+
 
 A graphics API built upon OpenGL designed to support a ludic approach to teaching C programming through game development and algorithm visualization.
 
