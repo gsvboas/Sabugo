@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['renderer_7',['Renderer',['../group__renderer.html',1,'']]],
-  ['renderer_2fshapes_8',['Renderer/Shapes',['../group__shapes.html',1,'']]]
+  ['extra_8',['Extra',['../group__extra.html',1,'']]],
+  ['extra_2falgovis_9',['Extra/Algovis',['../group__algovis.html',1,'']]]
 ];

@@ -8,6 +8,7 @@
 #include "Public/Math.h"
 #include "Public/Color.h"
 #include "Public/ShaderType.h"
+#include "Public/AlgovisTypes.h"
 
 /* ****************************** * CORE PUBLIC FUNCTIONALITY * ******************************* */
 /** \defgroup core Core */ /** @{ */ /* DOXYGEN_CORE_BEGIN */
@@ -62,10 +63,24 @@ void drawFillCircle(Vec2f center, float radius, Color color);
     @param density number of vertices that define the circumference */
 void drawFillCircleCustomDensity(Vec2f center, float radius, Color color, unsigned int density);
 /** @} */ /* DOXYGEN_SHAPES_END */
+/** \defgroup curves Renderer/Curves */ /** @{ */ /* DOXYGEN_CURVES_BEGIN */
+
+void drawLine(Vec2f a, Vec2f b, float thickness, Color color);
+/** @} */ /* DOXYGEN_CURVES_END */
+
+
+
 /** @} */ /* DOXYGEN_RENDERER_END */
 
 
 /* Scene public functionality */
+
+/* ****************************** * EXTRA PUBLIC FUNCTIONALITY * ****************************** */
+/** \defgroup extra Extra */ /** @{ */ /* DOXYGEN_EXTRA_BEGIN */
+/** \defgroup algovis Extra/Algovis */ /** @{ */ /* DOXYGEN_ALGOVIS_BEGIN */
+void drawTraversal_bpii(Node_bpii* root, Vec2f rootCenter, float radius, float spacingFactor);
+/** @} */ /* DOXYGEN_ALGOVIS_END*/
+/** @} */ /* DOXYGEN_EXTRA_END */
 
 
 #endif

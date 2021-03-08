@@ -2,6 +2,8 @@
 \label{Sabugo_8h}\index{src/Sabugo/Sabugo.h@{src/Sabugo/Sabugo.h}}
 {\ttfamily \#include \char`\"{}Public/\+Math.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Public/\+Color.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Public/\+Shader\+Type.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Public/\+Algovis\+Types.\+h\char`\"{}}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,4 +20,10 @@ void \mbox{\hyperlink{group__shapes_ga3717c4d6402056966e1dcad99b2f27f2}{draw\+Fi
 void \mbox{\hyperlink{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}{draw\+Fill\+Rectangle}} (Vec2f nw, Vec2f dim, Color color)
 \begin{DoxyCompactList}\small\item\em Draws a color-\/filled rectangle to the screen. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group__shapes_ga35e4acaa121fe1b76febe226216a3c81}{draw\+Fill\+Circle}} (Vec2f center, float radius, Color color)
-\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__shapes_gaee66e8a6c38eb5a0411d2da3864e368d}{draw\+Fill\+Circle\+Custom\+Density}} (Vec2f center, float radius, Color color, unsigned int density)
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen, with custom density. \end{DoxyCompactList}\item 
+void {\bfseries draw\+Line} (Vec2f a, Vec2f b, float thickness, Color color)
+\item 
+void {\bfseries draw\+Traversal\+\_\+bpii} (Node\+\_\+bpii $\ast$root, Vec2f root\+Center, float radius, float spacing\+Factor)
+\end{DoxyCompactItemize}

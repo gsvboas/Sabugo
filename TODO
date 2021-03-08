@@ -1,7 +1,45 @@
-1. Refactor Renderer/GraphicalContext.c's interfacing with Renderer/Shader.h to make Renderer/Shader.c handle shader string memory allocation (Renderer/Shader.c should be the one responsible for freeing the shader string).
+1. Complete Sabugo.h specifications
 
-2. Renaming Renderer/GraphicalContext.c to Renderer/renderergl.c
+(STARTED)
+=+ CORE +=
+- Core/Window 		: own application window context, providing the entry point interface to the API.
+- Core/Logging	 	: issue performance, debugging and additional information logs.
+=+ RENDERER +=
+- Renderer/Renderer	: API agnostic private rendering interface
+- Renderer/Shapes	: basic shape drawing public interface
+- Renderer/Shaders	: provide for the ability to treat geometry through the use of default-provided and/or user-defined shaders.
 
-3. Finish the public interface Sabugo.h
+=+ MATHS +=
+- Maths/...		: provide facilities such as model view projection matrices, transformations and such
 
-4. Implement Sabugo.h's specification.
+=+ BASIC ALGORITHMS +=
+- Algorithms/... 	: provide simple facilities for clean, purposeful and non-intrusive display of algorithms
+			(mostly to provide for basic algorithm visualization of simple algorithms taught in introduction to programming
+			courses, which would otherwise lack a visual representation - e.g., trees, searches, sorts, etc).
+
+
+
+(YET TO START)
+=+ CORE +=
+- Core/Events		: provide a screen event detection interface
+- Core/Logging		: issue performance, debugging and additional information logs.
+- Core/...		: further relevant core facilities (e.g, GUI such as ImGui)
+
+=+ RENDERER +=
+- Renderer/Curves	: provide for the ability to render lines and simple curves.
+- Renderer/Textures	: provide for the ability to render textures.
+- Renderer/Fonts	: provide for the ability to render fonts.
+- Renderer/...		: further relevant renderer facilities (e.g., solids)
+
+=+ SCENE +=
+- Scene/World 		: define where a scene takes place (screen view layouts, world coordinates and such).
+- Scene/Entities 	: provide a simple, general entity handling interface, to support an ECS approach to making games and simulations.
+- Scene/Components	: provide a simple, general components handling interface, to support an ECS approach to making games and simulations.
+- Scene/...		: further relevant scene facilities (e.g., FSM behaviour)
+
+
+=+ ... +=
+- Physics/...?		: Collision detection? Others? (e.g., see Box2D physics engine)
+- Meshes/...? 		: describe more complex geometry
+- Models/...?		: meshes + textures
+- AI/...?		: general AI algorithms

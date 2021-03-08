@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['terminate_10',['terminate',['../group__window.html#ga74a45d2648335936561898c390281a6a',1,'Sabugo.h']]]
+  ['sabugo_2eh_13',['Sabugo.h',['../Sabugo_8h.html',1,'']]]
 ];

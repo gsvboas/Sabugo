@@ -105,7 +105,7 @@ void initGraphicalContext(int winBufferWidth, int winBufferHeight)
     GLCONTEXT.program = getActiveShader();
     glUseProgram(GLCONTEXT.program);
 
-    ortho(-0.9f, 0.9f, -0.7f, 0.7f, -1.0f, 1.0f, m);
+    ortho(-2.0f, 2.0f, 2.0f, -2.0f, -1.0f, 1.0f, m);
     GLCONTEXT.uniform_location = glGetUniformLocation(GLCONTEXT.program, "MVP");
     glUniformMatrix4fv(GLCONTEXT.uniform_location, 1, GL_FALSE, &m[0][0]);
 
@@ -188,7 +188,7 @@ void drawContextData(unsigned int icount, Primitive mode)
 	    return;
     }
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.95f, 0.98f, 0.95f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     printf("vaos in use = %u vbos in use = %u\n", GLCONTEXT.vaos_in_use, GLCONTEXT.vbos_in_use);

@@ -1,8 +1,12 @@
 #include "Sabugo.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
 const char* const NAME = "SABUGO WINDOW";
+
+
 
 int main()
 {
@@ -26,14 +30,15 @@ int main()
     v5.x = +0.1f;
     v5.y = +0.1f;
 
-    v6.x = +0.7f;
-    v6.y = +0.7f;
+    v6.x = +0.0f;
+    v6.y = -0.7f;
 
 
     while (windowIsOpen())
     {
 	incr = v4.x >= 1.0f ? -0.01f : v4.x <= -1.0f ? 0.01f : incr;
 	v4.x += incr;
+
 	drawFillRectangle(v4, v5, RED);
 	drawFillTriangle(v1, v2, v3, BLUE);
 	drawFillCircle(v6, 0.1f, GREEN);

@@ -8,7 +8,9 @@ void \mbox{\hyperlink{group__shapes_ga3717c4d6402056966e1dcad99b2f27f2}{draw\+Fi
 void \mbox{\hyperlink{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}{draw\+Fill\+Rectangle}} (Vec2f nw, Vec2f dim, Color color)
 \begin{DoxyCompactList}\small\item\em Draws a color-\/filled rectangle to the screen. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{group__shapes_ga35e4acaa121fe1b76febe226216a3c81}{draw\+Fill\+Circle}} (Vec2f center, float radius, Color color)
-\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__shapes_gaee66e8a6c38eb5a0411d2da3864e368d}{draw\+Fill\+Circle\+Custom\+Density}} (Vec2f center, float radius, Color color, unsigned int density)
+\begin{DoxyCompactList}\small\item\em Draws a color-\/filled circle to the screen, with custom density. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -25,13 +27,32 @@ void \mbox{\hyperlink{group__shapes_ga35e4acaa121fe1b76febe226216a3c81}{draw\+Fi
 
 Draws a color-\/filled circle to the screen. 
 
-Like other shapes\textquotesingle{} draw functions, draw\+Circle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. Additionally, due to the way circles are drawn in computer graphics, Sabugo provides facilities for another, more general, draw\+Circle function. See draw\+Fill\+Circle\+Custom\+Density (or draw\+Circle\+Outline\+Custom\+Density) for an input on how many vertices should be used in the circle creation. 
+Like other shapes\textquotesingle{} draw functions, draw\+Fill\+Circle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. Additionally, due to the way circles are drawn in computer graphics, Sabugo provides facilities for another, more general, draw\+Circle function. See draw\+Fill\+Circle\+Custom\+Density (or draw\+Circle\+Outline\+Custom\+Density) for an input on how many vertices should be used in the circle creation. 
 \begin{DoxyParams}{Parameters}
 {\em center} & position vector which defines the center of the circle to be drawn. \\
 \hline
 {\em radius} & radius of the circle to be drawn. \\
 \hline
 {\em color} & rasterization color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__shapes_gaee66e8a6c38eb5a0411d2da3864e368d}\label{group__shapes_gaee66e8a6c38eb5a0411d2da3864e368d}} 
+\index{Renderer/Shapes@{Renderer/Shapes}!drawFillCircleCustomDensity@{drawFillCircleCustomDensity}}
+\index{drawFillCircleCustomDensity@{drawFillCircleCustomDensity}!Renderer/Shapes@{Renderer/Shapes}}
+\doxysubsubsection{\texorpdfstring{drawFillCircleCustomDensity()}{drawFillCircleCustomDensity()}}
+{\footnotesize\ttfamily void draw\+Fill\+Circle\+Custom\+Density (\begin{DoxyParamCaption}\item[{Vec2f}]{center,  }\item[{float}]{radius,  }\item[{Color}]{color,  }\item[{unsigned int}]{density }\end{DoxyParamCaption})}
+
+
+
+Draws a color-\/filled circle to the screen, with custom density. 
+
+This is an extension to the draw\+Fill\+Circle function, in that it allows the user to decide how many vertices should the circle be defined by. Like other shapes\textquotesingle{} draw functions, draw\+Fill\+Circle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. 
+\begin{DoxyParams}{Parameters}
+{\em radius} & radius of the circle to be drawn. \\
+\hline
+{\em color} & rasterization color \\
+\hline
+{\em density} & number of vertices that define the circumference \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}\label{group__shapes_gaab3938a5adb7c9bb3fd68b63fb9b6972}} 
@@ -44,7 +65,7 @@ Like other shapes\textquotesingle{} draw functions, draw\+Circle uses the curren
 
 Draws a color-\/filled rectangle to the screen. 
 
-Like other shapes\textquotesingle{} draw functions, draw\+Rectangle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. 
+Like other shapes\textquotesingle{} draw functions, draw\+Fill\+Rectangle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. 
 \begin{DoxyParams}{Parameters}
 {\em nw} & position vector which defines the north-\/western (up-\/most, left-\/most) vertex of the rectangle to be drawn. \\
 \hline
@@ -63,7 +84,7 @@ Like other shapes\textquotesingle{} draw functions, draw\+Rectangle uses the cur
 
 Draws a color-\/filled triangle to the screen. 
 
-Draws a triangle on the screen, using currently active shaders. 
+Like other shapes\textquotesingle{} draw functions, draw\+Fill\+Triangle uses the current shader context (whether it be the default shaders provided by Sabugo or a user-\/defined shader) to render the geometry. 
 \begin{DoxyParams}{Parameters}
 {\em a,b,c} & position vectors which define the vertices of the triangle to be drawn. \\
 \hline

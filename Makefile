@@ -25,9 +25,20 @@ DEFINE_EXTRA_BACKEND=
 DEMO_SRC=./sandbox/demo/src
 DEMO_BIN=./sandbox/demo/bin
 
+demos:		$(DEMO_BIN)/demoDrawTraversal\
+		$(DEMO_BIN)/demoBasicShapes\
+		$(DEMO_BIN)/demoBasicLinesAndCurves
+	touch $(DEMO_BIN)
 
+$(DEMO_BIN)/demoDrawTraversal:$(DEMO_SRC)/demoDrawTraversal.c lib/libsabugo.a
+	$(CC) -I./src/Sabugo $< -o $@ $(CFLAGS) $(LINK_EXTERNAL) -lm -L./lib -lsabugo
+	touch $@
 
-$(DEMO_BIN)/demo:$(DEMO_SRC)/demo.c lib/libsabugo.a
+$(DEMO_BIN)/demoBasicShapes:$(DEMO_SRC)/demoBasicShapes.c lib/libsabugo.a
+	$(CC) -I./src/Sabugo $< -o $@ $(CFLAGS) $(LINK_EXTERNAL) -lm -L./lib -lsabugo
+	touch $@
+
+$(DEMO_BIN)/demoBasicLinesAndCurves:$(DEMO_SRC)/demoBasicLinesAndCurves.c lib/libsabugo.a
 	$(CC) -I./src/Sabugo $< -o $@ $(CFLAGS) $(LINK_EXTERNAL) -lm -L./lib -lsabugo
 	touch $@
 
@@ -39,7 +50,8 @@ lib/libsabugo.a:$(SABUGO_CORE)/.obj/Window.o\
 		$(SABUGO_RENDERER)/.obj/Shader.o\
 		$(SABUGO_RENDERER)/.obj/ShaderGLSL.o\
 		$(SABUGO_MATHS)/.obj/mat4f_transform.o\
-		$(SABUGO_EXTRA)/.obj/CExtend.o
+		$(SABUGO_EXTRA)/.obj/CExtend.o\
+		$(SABUGO_EXTRA)/.obj/Algovis.o
 	ar -rcs $@ $^
 	touch $@
 
@@ -69,5 +81,7 @@ clean:
 	@echo "Cleaning up..."
 	@if [ -d "$(SABUGO_CORE)/.obj" ]; then rm -r "$(SABUGO_CORE)/.obj"; fi
 	@if [ -d "$(SABUGO_RENDERER)/.obj" ]; then rm -r "$(SABUGO_RENDERER)/.obj"; fi
+	@if [ -d "$(SABUGO_MATHS)/.obj" ]; then rm -r "$(SABUGO_MATHS)/.obj"; fi
+	@if [ -d "$(SABUGO_EXTRA)/.obj" ]; then rm -r "$(SABUGO_EXTRA)/.obj"; fi
 	rm -f ./lib/*.a
 	rm -f ./sandbox/demo/bin/*
