@@ -1,0 +1,9 @@
+[submodule "vendor/glew"]
+	path = vendor/glew
+	url = https://github.com/nigels-com/glew
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/glfw/glfw
+[submodule "vendor/googletest"]
+	path = vendor/googletest
+	url = https://github.com/google/googletest
